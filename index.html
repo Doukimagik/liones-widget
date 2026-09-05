@@ -1,833 +1,705 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0e0d">
-
+<meta name="theme-color" content="#0b0906">
 <title>Liones — Minecraft Moddé</title>
 
 <style>
 
 /* =========================================================
-   LIONES — PREMIUM MINECRAFT DASHBOARD
+   LIONES — ROYAUME MINECRAFT
+   Palette: nuit profonde + or de couronne + lie-de-vin
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    --bg: #070a09;
-    --panel: rgba(17, 23, 20, .82);
-    --panel-light: rgba(255,255,255,.045);
-    --border: rgba(255,255,255,.085);
+    --night: #0b0906;
+    --night-2: #14100a;
+    --panel: rgba(24, 19, 12, .82);
+    --border: rgba(212, 175, 55, .22);
+    --border-soft: rgba(255, 255, 255, .07);
 
-    --green: #61ff7a;
-    --green-dark: #24a94a;
-    --green-soft: rgba(97,255,122,.12);
+    --gold: #e8c471;
+    --gold-bright: #f6dd95;
+    --gold-dim: #a3843f;
+    --gold-soft: rgba(232, 196, 113, .12);
 
-    --purple: #7289da;
-    --purple-soft: rgba(114,137,218,.14);
+    --wine: #6e1f2b;
+    --wine-bright: #9b2f3f;
 
-    --text: #f4f7f5;
-    --muted: #8c9790;
-    --danger: #ff5c67;
-    --gold: #ffd86b;
+    --cream: #f4ecd8;
+    --muted: #9c9080;
+    --green: #6fd67f;
+    --danger: #e5636f;
 
-    --radius: 22px;
+    --radius: 18px;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
     min-height: 100vh;
-
     font-family: Inter, Arial, sans-serif;
-    color: var(--text);
-
-    background:
-        radial-gradient(
-            circle at 15% 5%,
-            rgba(65,255,100,.13),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(114,137,218,.12),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(40,180,70,.08),
-            transparent 30%
-        ),
-        #070a09;
-
+    color: var(--cream);
     display: flex;
     justify-content: center;
-    padding: 35px 18px;
+    padding: 40px 18px;
+
+    background:
+        radial-gradient(circle at 50% 0%, rgba(232,196,113,.09), transparent 40%),
+        radial-gradient(circle at 12% 85%, rgba(110,31,43,.16), transparent 45%),
+        radial-gradient(circle at 88% 90%, rgba(110,31,43,.12), transparent 45%),
+        var(--night);
 }
 
-/* =========================================================
-   BACKGROUND EFFECTS
-   ========================================================= */
-
+/* subtle heraldic damask texture via repeating diamonds */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-
     background-image:
-        linear-gradient(
-            rgba(255,255,255,.015) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.015) 1px,
-            transparent 1px
-        );
-
-    background-size: 45px 45px;
-
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
-
+        repeating-linear-gradient(45deg, rgba(232,196,113,.025) 0 2px, transparent 2px 34px),
+        repeating-linear-gradient(-45deg, rgba(232,196,113,.025) 0 2px, transparent 2px 34px);
+    mask-image: radial-gradient(circle at 50% 20%, black, transparent 75%);
     pointer-events: none;
 }
 
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-.dashboard {
+.realm {
     width: 100%;
-    max-width: 1080px;
-
+    max-width: 1040px;
     position: relative;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(20,27,23,.96),
-            rgba(8,11,10,.97)
-        );
-
-    border: 1px solid var(--border);
-    border-radius: 28px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.65),
-        0 0 100px rgba(70,255,100,.055);
 }
 
 /* =========================================================
-   TOP GLOW
+   CREST HEADER
    ========================================================= */
 
-.dashboard::before {
-    content: "";
-
-    position: absolute;
-    top: -160px;
-    left: 15%;
-
-    width: 70%;
-    height: 250px;
-
-    background: var(--green);
-
-    filter: blur(130px);
-    opacity: .08;
-
-    pointer-events: none;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
+.crest-header {
     position: relative;
-
-    padding: 36px;
-
-    border-bottom: 1px solid var(--border);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(49,110,57,.30),
-            rgba(12,17,14,.65)
-        );
+    text-align: center;
+    padding: 8px 0 30px;
 }
 
-.hero-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 25px;
+.crest {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 6px;
+    filter: drop-shadow(0 6px 22px rgba(232,196,113,.25));
 }
 
-.brand {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.logo {
-    width: 78px;
-    height: 78px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 21px;
-
-    font-size: 40px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #6eff84,
-            #247c38
-        );
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,.35),
-        0 15px 40px rgba(45,255,85,.20);
-}
-
-.brand h1 {
-    font-family: Rajdhani, sans-serif;
-
-    font-size: 42px;
-    font-weight: 700;
-
-    letter-spacing: 2px;
-}
-
-.brand-description {
-    color: var(--muted);
-    margin-top: 2px;
-    font-size: 14px;
-}
-
-.mod-badge {
-    display: inline-flex;
-
-    margin-top: 11px;
-    padding: 6px 11px;
-
-    border-radius: 999px;
-
-    color: #8cff9d;
-    background: var(--green-soft);
-    border: 1px solid rgba(97,255,122,.16);
-
-    font-size: 10px;
+.realm-title {
+    font-family: Cinzel, serif;
     font-weight: 800;
+    font-size: 58px;
+    letter-spacing: 7px;
+    line-height: 1;
+    color: transparent;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold) 55%, var(--gold-dim));
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 2px 30px rgba(232,196,113,.18);
+}
 
-    letter-spacing: 1px;
+.realm-subtitle {
+    margin-top: 6px;
+    font-family: Cinzel, serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: var(--muted);
+}
+
+.crest-divider {
+    width: 220px;
+    height: 1px;
+    margin: 16px auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    position: relative;
+}
+
+.crest-divider::before {
+    content: "❖";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--night);
+    padding: 0 10px;
+    color: var(--gold-dim);
+    font-size: 11px;
 }
 
 /* =========================================================
-   SERVER STATUS
+   MAIN PANEL
    ========================================================= */
 
-.live-status {
-    min-width: 190px;
+.panel {
+    background: linear-gradient(160deg, rgba(30,23,14,.92), rgba(10,8,5,.95));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 50px 120px rgba(0,0,0,.6), inset 0 1px rgba(255,255,255,.03);
+}
 
+/* status strip */
+
+.status-strip {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border-soft);
+    background: linear-gradient(90deg, rgba(232,196,113,.06), transparent 60%);
+}
+
+.status-left {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 210px;
+}
 
-    padding: 13px 16px;
-
-    border-radius: 15px;
-
-    background: rgba(0,0,0,.25);
-    border: 1px solid rgba(255,255,255,.055);
+.server-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    image-rendering: pixelated;
+    background: rgba(232,196,113,.08);
+    border: 1px solid var(--border-soft);
+    flex-shrink: 0;
 }
 
 .status-dot {
-    width: 10px;
-    height: 10px;
-
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-
     background: var(--green);
-
-    box-shadow:
-        0 0 8px var(--green),
-        0 0 20px rgba(97,255,122,.5);
-
+    box-shadow: 0 0 8px var(--green), 0 0 22px rgba(111,214,127,.5);
     animation: pulse 1.8s infinite;
+    flex-shrink: 0;
 }
 
 .status-dot.offline {
     background: var(--danger);
-
-    box-shadow:
-        0 0 8px var(--danger);
+    box-shadow: 0 0 8px var(--danger);
 }
 
 @keyframes pulse {
-    0%,100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(.75);
-        opacity: .6;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(.7); opacity: .55; }
 }
 
-.status-text strong {
-    display: block;
-    font-size: 12px;
-}
-
-.status-text small {
-    display: block;
-
-    color: var(--muted);
-    margin-top: 2px;
-
-    font-size: 10px;
-}
-
-/* =========================================================
-   MAIN CONTENT
-   ========================================================= */
-
-.content {
-    padding: 25px;
-
-    display: grid;
-    grid-template-columns: 1.35fr .65fr;
-
-    gap: 18px;
-}
-
-.card {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.018)
-        );
-
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-
-    padding: 22px;
-
-    backdrop-filter: blur(18px);
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        background .25s ease;
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(97,255,122,.17);
-}
-
-/* =========================================================
-   TITLES
-   ========================================================= */
-
-.card-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 18px;
-}
-
-.card-title h2 {
+.status-left strong {
+    font-family: Cinzel, serif;
     font-size: 14px;
-    font-weight: 800;
+    letter-spacing: 1.5px;
+    display: block;
 }
 
-.card-title span {
+.status-left small {
     color: var(--muted);
-    font-size: 10px;
+    font-size: 11px;
+    display: block;
+    margin-top: 2px;
 }
 
-/* =========================================================
-   MINECRAFT INFO
-   ========================================================= */
-
-.server-description {
-    color: #aeb8b1;
-
-    font-size: 13px;
-    line-height: 1.65;
-
-    margin-bottom: 20px;
-}
-
-.server-description strong {
-    color: white;
-}
-
-/* =========================================================
-   STATS
-   ========================================================= */
-
-.stats {
+.status-stats {
+    flex: 1;
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
-.stat {
-    padding: 15px;
-
-    border-radius: 15px;
-
-    background: rgba(0,0,0,.20);
-
-    border: 1px solid rgba(255,255,255,.045);
+.mini-stat {
+    text-align: center;
+    padding: 8px 6px;
+    border-left: 1px solid var(--border-soft);
 }
 
-.stat-icon {
-    font-size: 16px;
-}
+.mini-stat:first-child { border-left: none; }
 
-.stat-label {
+.mini-stat .icon { font-size: 15px; }
+
+.mini-stat .val {
     display: block;
-
-    margin-top: 9px;
-
-    color: var(--muted);
-
-    font-size: 10px;
-}
-
-.stat-value {
-    display: block;
-
-    margin-top: 3px;
-
-    font-size: 14px;
     font-weight: 700;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-/* =========================================================
-   IP
-   ========================================================= */
+.mini-stat .lbl {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* server info row (motd / version / software) */
+
+.info-row {
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+}
+
+.motd {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+}
+
+.motd strong { color: var(--cream); font-style: normal; }
+
+.tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: var(--gold-bright);
+    background: var(--gold-soft);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+#offlineHintWrap:not(:empty) {
+    padding: 14px 28px 0;
+}
+
+.offline-hint {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(229,99,111,.08);
+    border: 1px solid rgba(229,99,111,.25);
+    color: #f0a3ab;
+    font-size: 11.5px;
+    line-height: 1.5;
+}
+
+/* ip box */
+
+.ip-row {
+    padding: 18px 28px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-soft);
+}
 
 .ip-box {
-    margin-top: 13px;
-
+    flex: 1;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-
     gap: 12px;
-
-    padding: 13px 15px;
-
-    border-radius: 14px;
-
-    background: rgba(0,0,0,.27);
-
-    border: 1px dashed rgba(97,255,122,.15);
+    padding: 13px 18px;
+    border-radius: 13px;
+    background: rgba(0,0,0,.32);
+    border: 1px dashed var(--border);
 }
 
+.ip-box .cube { font-size: 16px; }
+
 .ip {
-    font-family: monospace;
-
-    color: #b9ffc3;
-
-    font-size: 12px;
-
+    font-family: 'Cinzel', monospace;
+    font-size: 13px;
+    letter-spacing: .5px;
+    color: var(--gold-bright);
     word-break: break-all;
 }
 
 .copy-button {
     flex-shrink: 0;
-
-    border: 0;
-
-    color: white;
-
-    background: var(--green-dark);
-
-    padding: 8px 12px;
-
-    border-radius: 9px;
-
-    font-size: 10px;
-    font-weight: 800;
-
+    border: 1px solid var(--gold-dim);
+    color: var(--night);
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold-dim));
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-family: Inter, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
-
     transition: .2s;
+    white-space: nowrap;
 }
 
-.copy-button:hover {
-    filter: brightness(1.2);
-    transform: scale(1.03);
+.copy-button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* content grid */
+
+.content {
+    padding: 22px 28px 28px;
+    display: grid;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 18px;
 }
 
-/* =========================================================
-   PLAYERS
-   ========================================================= */
+.card {
+    background: linear-gradient(160deg, rgba(255,255,255,.03), rgba(255,255,255,.012));
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius);
+    padding: 20px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.card-title h2 {
+    font-family: Cinzel, serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: var(--gold-bright);
+}
+
+.card-title span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* players */
 
 .player-list {
-    max-height: 230px;
-
+    max-height: 260px;
     overflow-y: auto;
-
     padding-right: 3px;
 }
 
-.player-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.player-list::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.12);
-    border-radius: 10px;
-}
+.player-list::-webkit-scrollbar { width: 4px; }
+.player-list::-webkit-scrollbar-thumb { background: rgba(232,196,113,.18); border-radius: 10px; }
 
 .player {
     display: flex;
     align-items: center;
-    gap: 11px;
-
-    padding: 9px;
-
-    border-radius: 11px;
-
-    transition: .2s;
+    gap: 12px;
+    padding: 9px 6px;
+    border-radius: 10px;
+    transition: .15s;
 }
 
-.player:hover {
-    background: rgba(255,255,255,.04);
-}
+.player:hover { background: rgba(232,196,113,.05); }
 
 .player-avatar {
-    width: 34px;
-    height: 34px;
-
-    border-radius: 9px;
-
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     image-rendering: pixelated;
-
-    background: #202721;
+    background: #221c12;
+    border: 1px solid var(--border-soft);
 }
 
-.player-name {
-    font-size: 12px;
-    font-weight: 600;
-}
+.player-name { font-size: 12.5px; font-weight: 600; }
 
 .player-status {
     margin-left: auto;
-
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
-
     background: var(--green);
-
-    box-shadow: 0 0 8px var(--green);
+    box-shadow: 0 0 7px var(--green);
 }
 
 .empty {
-    padding: 35px 10px;
-
+    padding: 30px 10px;
     text-align: center;
-
     color: var(--muted);
-
     font-size: 12px;
 }
 
-/* =========================================================
-   DISCORD
-   ========================================================= */
+/* join hero card */
 
-.discord-card {
-    border-color: rgba(114,137,218,.13);
-}
-
-.discord-card:hover {
-    border-color: rgba(114,137,218,.28);
-}
-
-.discord-header {
+.join-card {
+    position: relative;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 250px;
+    border-radius: var(--radius);
+    padding: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background:
+        linear-gradient(180deg, rgba(11,9,6,.15) 0%, rgba(11,9,6,.92) 88%),
+        radial-gradient(circle at 30% 20%, rgba(232,196,113,.16), transparent 55%),
+        linear-gradient(150deg, #241b10, #0c0906 75%);
+}
+
+.join-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(11,9,6,0) 40%, rgba(11,9,6,.9)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 26px);
+    pointer-events: none;
+}
+
+.join-eyebrow {
+    position: relative;
+    font-family: Cinzel, serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+}
+
+.join-title {
+    position: relative;
+    font-family: Cinzel, serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+    line-height: 1.15;
+}
+
+.join-button {
+    position: relative;
+    display: inline-flex;
+    align-self: flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
+    padding: 13px 22px;
+    border-radius: 12px;
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold-dim));
+    color: var(--night);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.discord-icon {
-    width: 34px;
-    height: 34px;
+.join-button:hover { transform: translateY(-2px); filter: brightness(1.08); }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* nav row (classement / evenements / regles) */
 
-    border-radius: 10px;
-
-    background: var(--purple-soft);
-
-    font-size: 17px;
-}
-
-.discord-online {
-    color: #75ff88;
-    font-size: 10px;
-}
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-.actions {
-    padding: 0 25px 25px;
-
+.nav-row {
+    padding: 0 28px 16px;
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
 
-.button {
-    position: relative;
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.02);
+    border: 1px solid var(--border-soft);
+    text-decoration: none;
+    color: var(--cream);
+    transition: .2s;
+    cursor: pointer;
+}
 
+.nav-link:hover {
+    border-color: var(--border);
+    background: var(--gold-soft);
+}
+
+.nav-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(232,196,113,.1);
+    font-size: 15px;
+}
+
+.nav-text strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+.nav-text small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.nav-arrow { margin-left: auto; color: var(--gold-dim); font-size: 14px; }
+
+/* discord banner */
+
+.discord-banner {
+    margin: 0 28px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    background: linear-gradient(120deg, rgba(110,31,43,.35), rgba(24,19,12,.4));
+    border: 1px solid rgba(155,47,63,.35);
+}
+
+.discord-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    background: rgba(155,47,63,.25);
+}
+
+.discord-text { flex: 1; }
+
+.discord-text strong {
+    font-family: Cinzel, serif;
+    font-size: 14px;
+    letter-spacing: .5px;
+    display: block;
+}
+
+.discord-text span {
+    color: var(--muted);
+    font-size: 11px;
+    display: block;
+    margin-top: 3px;
+}
+
+.discord-button {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 11px;
+    background: var(--wine-bright);
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .5px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.discord-button:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+/* refresh row */
+
+.refresh-row {
     display: flex;
     justify-content: center;
+    padding: 0 28px 22px;
+}
+
+.refresh-button {
+    display: inline-flex;
     align-items: center;
-
-    gap: 9px;
-
-    padding: 14px;
-
-    border-radius: 13px;
-
-    text-decoration: none;
-
-    color: white;
-
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--border-soft);
+    color: var(--muted);
     font-size: 11px;
-    font-weight: 800;
-
-    border: 1px solid transparent;
-
+    font-weight: 600;
+    letter-spacing: .5px;
     cursor: pointer;
-
-    transition:
-        transform .2s,
-        filter .2s,
-        border-color .2s;
+    transition: .2s;
 }
 
-.button:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.12);
-}
+.refresh-button:hover { color: var(--gold-bright); border-color: var(--border); }
 
-.button-minecraft {
-    background:
-        linear-gradient(
-            135deg,
-            #3ca653,
-            #237936
-        );
-}
-
-.button-discord {
-    background:
-        linear-gradient(
-            135deg,
-            #6677df,
-            #4657c1
-        );
-}
-
-.button-refresh {
-    background: rgba(255,255,255,.055);
-    border-color: var(--border);
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* footer */
 
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 17px 25px;
-
-    color: #59635c;
-
-    font-size: 9px;
-
-    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 16px 28px;
+    color: #61574a;
+    font-size: 10px;
+    border-top: 1px solid var(--border-soft);
 }
 
-.footer strong {
-    color: #718078;
-}
-
-/* =========================================================
-   TOAST
-   ========================================================= */
+/* toast */
 
 .toast {
     position: fixed;
-
     left: 50%;
-    bottom: 25px;
-
-    transform:
-        translate(-50%, 20px);
-
+    bottom: 28px;
+    transform: translate(-50%, 20px);
     opacity: 0;
-
     pointer-events: none;
-
-    padding: 11px 17px;
-
-    border-radius: 10px;
-
-    background: #151b17;
-
-    border: 1px solid rgba(97,255,122,.18);
-
-    color: #bfffc8;
-
-    font-size: 11px;
+    padding: 12px 20px;
+    border-radius: 11px;
+    background: #1a140b;
+    border: 1px solid var(--border);
+    color: var(--gold-bright);
+    font-size: 12px;
     font-weight: 600;
-
     transition: .3s;
-
-    box-shadow: 0 15px 40px rgba(0,0,0,.45);
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
 }
 
-.toast.show {
-    transform:
-        translate(-50%, 0);
-
-    opacity: 1;
-}
-
-/* =========================================================
-   LOADING
-   ========================================================= */
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
 
 .loading {
     display: inline-block;
-
     width: 12px;
     height: 12px;
-
-    border: 2px solid rgba(255,255,255,.12);
-    border-top-color: var(--green);
-
+    border: 2px solid rgba(232,196,113,.18);
+    border-top-color: var(--gold);
     border-radius: 50%;
-
     animation: spin .7s linear infinite;
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* =========================================================
    RESPONSIVE
    ========================================================= */
 
 @media (max-width: 800px) {
-
-    body {
-        padding: 15px;
-    }
-
-    .hero {
-        padding: 25px;
-    }
-
-    .hero-grid {
-        flex-direction: column;
-    }
-
-    .live-status {
-        width: 100%;
-    }
-
-    .content {
-        grid-template-columns: 1fr;
-    }
-
-    .actions {
-        grid-template-columns: 1fr;
-    }
+    .realm-title { font-size: 42px; letter-spacing: 4px; }
+    .status-strip { flex-direction: column; align-items: stretch; gap: 16px; }
+    .status-stats { grid-template-columns: repeat(2, 1fr); }
+    .mini-stat:nth-child(3) { border-left: none; }
+    .content { grid-template-columns: 1fr; padding: 18px; }
+    .nav-row { grid-template-columns: 1fr; padding: 0 18px 14px; }
+    .ip-row { padding: 16px 18px; flex-direction: column; }
+    .discord-banner { margin: 0 18px 18px; flex-wrap: wrap; }
+    .footer { flex-direction: column; gap: 6px; padding: 16px 18px; }
 }
 
-@media (max-width: 500px) {
-
-    .brand h1 {
-        font-size: 34px;
-    }
-
-    .logo {
-        width: 64px;
-        height: 64px;
-        font-size: 32px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .content {
-        padding: 15px;
-    }
-
-    .actions {
-        padding: 0 15px 15px;
-    }
-
-    .footer {
-        flex-direction: column;
-        gap: 6px;
-    }
+@media (max-width: 480px) {
+    .realm-title { font-size: 32px; letter-spacing: 2px; }
+    .join-title { font-size: 21px; }
 }
 
 </style>
@@ -835,382 +707,219 @@ body::before {
 
 <body>
 
-<div class="dashboard">
+<div class="realm">
 
     <!-- =====================================================
-         HERO
+         CREST HEADER
          ===================================================== -->
 
-    <section class="hero">
+    <header class="crest-header">
 
-        <div class="hero-grid">
+        <svg class="crest" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f6dd95"/>
+                    <stop offset="55%" stop-color="#e8c471"/>
+                    <stop offset="100%" stop-color="#a3843f"/>
+                </linearGradient>
+            </defs>
+            <!-- crown -->
+            <path d="M28 30 L36 14 L45 26 L50 12 L55 26 L64 14 L72 30 Z" fill="url(#goldGrad)"/>
+            <circle cx="36" cy="14" r="2.6" fill="url(#goldGrad)"/>
+            <circle cx="50" cy="12" r="2.6" fill="url(#goldGrad)"/>
+            <circle cx="64" cy="14" r="2.6" fill="url(#goldGrad)"/>
+            <!-- lion face -->
+            <circle cx="50" cy="56" r="24" fill="none" stroke="url(#goldGrad)" stroke-width="2.4"/>
+            <path d="M50 34 C40 34 33 42 33 52 C33 62 40 72 50 76 C60 72 67 62 67 52 C67 42 60 34 50 34 Z"
+                  fill="none" stroke="url(#goldGrad)" stroke-width="2.4"/>
+            <path d="M30 40 C24 36 20 40 22 46 C25 44 28 44 31 46 Z" fill="url(#goldGrad)"/>
+            <path d="M70 40 C76 36 80 40 78 46 C75 44 72 44 69 46 Z" fill="url(#goldGrad)"/>
+            <circle cx="42" cy="53" r="2.2" fill="url(#goldGrad)"/>
+            <circle cx="58" cy="53" r="2.2" fill="url(#goldGrad)"/>
+            <path d="M46 60 Q50 64 54 60" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M50 56 L50 60" stroke="url(#goldGrad)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
 
-            <div class="brand">
+        <h1 class="realm-title">LIONES</h1>
+        <p class="realm-subtitle">ROYAUME MINECRAFT MODDÉ</p>
 
-                <div class="logo">
-                    🦁
-                </div>
+        <div class="crest-divider"></div>
 
+    </header>
+
+
+    <!-- =====================================================
+         MAIN PANEL
+         ===================================================== -->
+
+    <div class="panel">
+
+        <!-- STATUS STRIP -->
+
+        <section class="status-strip">
+
+            <div class="status-left">
+                <img id="serverIcon" class="server-icon" style="display:none" alt="Icône du serveur">
+                <div id="statusDot" class="status-dot"></div>
                 <div>
+                    <strong id="statusText">VÉRIFICATION...</strong>
+                    <small id="statusSub">Connexion au serveur</small>
+                </div>
+            </div>
 
-                    <h1>LIONES</h1>
+            <div class="status-stats">
 
-                    <p class="brand-description">
-                        Serveur Minecraft moddé
-                    </p>
+                <div class="mini-stat">
+                    <span class="icon">👥</span>
+                    <span class="val" id="playerCount">—</span>
+                    <span class="lbl">JOUEURS</span>
+                </div>
 
-                    <div class="mod-badge">
-                        ⚔️ MODDED • SURVIVAL • COMMUNITY
+                <div class="mini-stat">
+                    <span class="icon">⚔️</span>
+                    <span class="val">Liones</span>
+                    <span class="lbl">MODPACK</span>
+                </div>
+
+                <div class="mini-stat">
+                    <span class="icon">🧭</span>
+                    <span class="val">Survival</span>
+                    <span class="lbl">MODE</span>
+                </div>
+
+                <div class="mini-stat">
+                    <span class="icon">📶</span>
+                    <span class="val" id="pingValue">—</span>
+                    <span class="lbl">PING</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVER INFO (MOTD / version / software) -->
+
+        <section class="info-row" id="infoRow" style="display:none">
+            <span class="motd" id="motdText"></span>
+            <div class="tag-row" id="tagRow"></div>
+        </section>
+
+        <div id="offlineHintWrap"></div>
+
+        <!-- IP -->
+
+        <section class="ip-row">
+            <div class="ip-box">
+                <span class="cube">🟩</span>
+                <span class="ip" id="serverIP">Liones.aternos.me:55340</span>
+            </div>
+            <button class="copy-button" onclick="copyIP()">COPIER L'IP</button>
+        </section>
+
+
+        <!-- CONTENT -->
+
+        <main class="content">
+
+            <!-- PLAYERS -->
+
+            <section class="card">
+                <div class="card-title">
+                    <h2>Joueurs en ligne</h2>
+                    <span id="playerNumber">—</span>
+                </div>
+
+                <div class="player-list" id="minecraftPlayers">
+                    <div class="empty">
+                        <span class="loading"></span><br><br>
+                        Recherche des joueurs...
                     </div>
-
                 </div>
+            </section>
 
+
+            <!-- JOIN -->
+
+            <section class="join-card">
+                <p class="join-eyebrow">✦ L'AVENTURE T'ATTEND ✦</p>
+                <h3 class="join-title">Rejoins l'aventure<br>Liones</h3>
+                <button class="join-button" onclick="copyIP()">⚔ Rejoindre le serveur</button>
+            </section>
+
+        </main>
+
+
+        <!-- NAV ROW -->
+
+        <nav class="nav-row">
+
+            <a class="nav-link" href="#" onclick="return false;">
+                <span class="nav-icon">🏆</span>
+                <span class="nav-text">
+                    <strong>Classement</strong>
+                    <small>Voir les meilleurs joueurs</small>
+                </span>
+                <span class="nav-arrow">›</span>
+            </a>
+
+            <a class="nav-link" href="#" onclick="return false;">
+                <span class="nav-icon">📅</span>
+                <span class="nav-text">
+                    <strong>Évènements</strong>
+                    <small>Voir les prochains events</small>
+                </span>
+                <span class="nav-arrow">›</span>
+            </a>
+
+            <a class="nav-link" href="#" onclick="return false;">
+                <span class="nav-icon">📜</span>
+                <span class="nav-text">
+                    <strong>Règles</strong>
+                    <small>Lisez les règles du serveur</small>
+                </span>
+                <span class="nav-arrow">›</span>
+            </a>
+
+        </nav>
+
+
+        <!-- DISCORD -->
+
+        <section class="discord-banner">
+            <div class="discord-icon">💬</div>
+            <div class="discord-text">
+                <strong>Rejoins-nous sur Discord</strong>
+                <span id="discordCount">Chargement...</span>
             </div>
+            <a class="discord-button" href="https://discord.com/widget?id=1545512286007984140&theme=dark" target="_blank">
+                Rejoindre ›
+            </a>
+        </section>
 
 
-            <div class="live-status">
+        <!-- REFRESH -->
 
-                <div
-                    id="statusDot"
-                    class="status-dot"
-                ></div>
-
-                <div class="status-text">
-
-                    <strong id="statusText">
-                        Vérification...
-                    </strong>
-
-                    <small id="statusSub">
-                        Connexion au serveur
-                    </small>
-
-                </div>
-
-            </div>
-
+        <div class="refresh-row">
+            <button class="refresh-button" onclick="refreshAll()" id="refreshBtn">
+                🔄 <span id="lastUpdate">Actualiser</span>
+            </button>
         </div>
 
-    </section>
 
+        <!-- FOOTER -->
 
-    <!-- =====================================================
-         CONTENT
-         ===================================================== -->
-
-    <main class="content">
-
-
-        <!-- SERVER CARD -->
-
-        <section class="card">
-
-            <div class="card-title">
-
-                <h2>🎮 SERVEUR MINECRAFT</h2>
-
-                <span id="lastUpdate">
-                    Actualisation...
-                </span>
-
-            </div>
-
-
-            <p class="server-description">
-
-                Bienvenue sur <strong>Liones</strong> 🦁,
-                une aventure Minecraft modifiée pensée pour
-                une communauté active. Explorez, construisez,
-                combattez et découvrez les possibilités offertes
-                par notre expérience moddé.
-
-            </p>
-
-
-            <div class="stats">
-
-                <div class="stat">
-
-                    <span class="stat-icon">👥</span>
-
-                    <span class="stat-label">
-                        JOUEURS
-                    </span>
-
-                    <span
-                        class="stat-value"
-                        id="playerCount"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <span class="stat-icon">⚔️</span>
-
-                    <span class="stat-label">
-                        TYPE
-                    </span>
-
-                    <span class="stat-value">
-                        Moddé
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <span class="stat-icon">🧱</span>
-
-                    <span class="stat-label">
-                        MODE
-                    </span>
-
-                    <span class="stat-value">
-                        Survival
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="ip-box">
-
-                <span
-                    class="ip"
-                    id="serverIP"
-                >
-                    Liones.aternos.me:55340
-                </span>
-
-                <button
-                    class="copy-button"
-                    onclick="copyIP()"
-                >
-                    COPIER
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- PLAYERS CARD -->
-
-        <section class="card">
-
-            <div class="card-title">
-
-                <div>
-                    <h2>👥 JOUEURS EN LIGNE</h2>
-                </div>
-
-                <span id="playerNumber">
-                    —
-                </span>
-
-            </div>
-
-
-            <div
-                class="player-list"
-                id="minecraftPlayers"
-            >
-
-                <div class="empty">
-                    <span class="loading"></span>
-                    <br><br>
-                    Recherche des joueurs...
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- DISCORD CARD -->
-
-        <section class="card discord-card">
-
-            <div class="card-title">
-
-                <div class="discord-header">
-
-                    <div class="discord-icon">
-                        💬
-                    </div>
-
-                    <div>
-
-                        <h2>DISCORD LIONES</h2>
-
-                        <span class="discord-online">
-                            ● Communauté active
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <span id="discordCount">
-                    —
-                </span>
-
-            </div>
-
-
-            <p class="server-description">
-
-                Rejoins la communauté Liones pour discuter,
-                retrouver les joueurs, recevoir les annonces
-                du serveur et participer aux événements.
-
-            </p>
-
-
-            <div
-                class="player-list"
-                id="discordMembers"
-            >
-
-                <div class="empty">
-                    Chargement du Discord...
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- QUICK INFO -->
-
-        <section class="card">
-
-            <div class="card-title">
-
-                <h2>✨ LIONES</h2>
-
-                <span>INFOS</span>
-
-            </div>
-
-
-            <div class="stats">
-
-                <div class="stat">
-
-                    <span class="stat-icon">🌍</span>
-
-                    <span class="stat-label">
-                        UNIVERS
-                    </span>
-
-                    <span class="stat-value">
-                        Liones
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <span class="stat-icon">🦁</span>
-
-                    <span class="stat-label">
-                        COMMUNAUTÉ
-                    </span>
-
-                    <span class="stat-value">
-                        Liones
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <span class="stat-icon">🔄</span>
-
-                    <span class="stat-label">
-                        UPDATE
-                    </span>
-
-                    <span class="stat-value">
-                        30 sec
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         ACTIONS
-         ===================================================== -->
-
-    <div class="actions">
-
-        <button
-            class="button button-minecraft"
-            onclick="copyIP()"
-        >
-            🎮 COPIER L'IP
-        </button>
-
-
-        <a
-            class="button button-discord"
-            href="https://discord.com/widget?id=1545512286007984140&theme=dark"
-            target="_blank"
-        >
-            💬 OUVRIR DISCORD
-        </a>
-
-
-        <button
-            class="button button-refresh"
-            onclick="refreshAll()"
-        >
-            🔄 ACTUALISER
-        </button>
+        <footer class="footer">
+            <span>🦁 <strong>LIONES</strong> · Minecraft Moddé</span>
+            <span id="footerStatus">Vérification du serveur...</span>
+        </footer>
 
     </div>
 
-
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-
-    <footer class="footer">
-
-        <span>
-            🦁 <strong>LIONES</strong> • Minecraft Moddé
-        </span>
-
-        <span id="footerStatus">
-            Vérification du serveur...
-        </span>
-
-    </footer>
-
 </div>
 
 
-<div
-    class="toast"
-    id="toast"
->
-    IP copiée !
-</div>
+<div class="toast" id="toast">IP copiée !</div>
 
 
 <script>
@@ -1220,36 +929,71 @@ body::before {
    ========================================================= */
 
 const CONFIG = {
-
-    minecraftHost:
-        "Liones.aternos.me",
-
-    minecraftPort:
-        "55340",
-
-    minecraftAddress:
-        "Liones.aternos.me:55340",
-
-    discordGuild:
-        "1545512286007984140",
-
-    refreshInterval:
-        30000
-
+    minecraftHost: "Liones.aternos.me",
+    minecraftPort: "55340",
+    minecraftAddress: "Liones.aternos.me:55340",
+    discordGuild: "1545512286007984140",
+    refreshInterval: 30000
 };
 
-
-/* =========================================================
-   DOM
-   ========================================================= */
-
-const $ = id =>
-    document.getElementById(id);
-
+const $ = id => document.getElementById(id);
 
 /* =========================================================
    MINECRAFT STATUS
    ========================================================= */
+
+/* Two providers in a row: mcsrvstat first, mcstatus.io as backup.
+   Each is normalized to the same shape so the rest of the app
+   doesn't care which one answered. */
+
+async function fetchWithTimeout(url, ms = 7000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    try {
+        const res = await fetch(url, { cache: "no-store", signal: controller.signal });
+        return res;
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
+async function queryMcsrvstat() {
+    const url = `https://api.mcsrvstat.us/3/${encodeURIComponent(CONFIG.minecraftHost)}:${CONFIG.minecraftPort}`;
+    const res = await fetchWithTimeout(url);
+    if (!res.ok) throw new Error("mcsrvstat: HTTP " + res.status);
+    const data = await res.json();
+
+    return {
+        online: data.online === true,
+        online_count: data.players?.online ?? 0,
+        max: data.players?.max ?? "?",
+        list: (data.players?.list || []).map(p => (typeof p === "string" ? p : p.name)),
+        ping: data.debug?.ping ? `${data.debug.ping}ms` : null,
+        version: data.version || null,
+        software: data.software || null,
+        motd: data.motd?.clean?.join(" ").trim() || null,
+        icon: data.icon || null
+    };
+}
+
+async function queryMcstatus() {
+    const url = `https://api.mcstatus.io/v2/status/java/${encodeURIComponent(CONFIG.minecraftHost)}:${CONFIG.minecraftPort}`;
+    const res = await fetchWithTimeout(url);
+    if (!res.ok) throw new Error("mcstatus.io: HTTP " + res.status);
+    const data = await res.json();
+
+    return {
+        online: data.online === true,
+        online_count: data.players?.online ?? 0,
+        max: data.players?.max ?? "?",
+        list: (data.players?.list || []).map(p => p.name_clean || p.name_raw),
+        ping: null,
+        version: data.version?.name_clean || null,
+        software: data.software || null,
+        motd: data.motd?.clean || null,
+        icon: data.icon || null
+    };
+}
 
 async function loadMinecraft() {
 
@@ -1257,155 +1001,115 @@ async function loadMinecraft() {
     const statusSub = $("statusSub");
     const dot = $("statusDot");
 
+    let data = null;
+    let sourceFailed = false;
+
     try {
-
-        const url =
-            `https://api.mcsrvstat.us/3/${encodeURIComponent(
-                CONFIG.minecraftHost
-            )}:${CONFIG.minecraftPort}`;
-
-        const response =
-            await fetch(url, {
-                cache: "no-store"
-            });
-
-        if (!response.ok) {
-            throw new Error("API unavailable");
+        data = await queryMcsrvstat();
+    } catch (e1) {
+        console.warn("mcsrvstat indisponible, tentative avec mcstatus.io", e1);
+        sourceFailed = true;
+        try {
+            data = await queryMcstatus();
+        } catch (e2) {
+            console.error("Les deux sources de statut ont échoué", e2);
         }
-
-        const data =
-            await response.json();
-
-
-        /* -------------------------------------------------
-           SERVER ONLINE
-           ------------------------------------------------- */
-
-        if (data.online === true) {
-
-            dot.classList.remove("offline");
-
-            statusText.textContent =
-                "SERVEUR EN LIGNE";
-
-            statusText.style.color =
-                "var(--green)";
-
-            statusSub.textContent =
-                `${data.players?.online ?? 0} joueur(s) connecté(s)`;
-
-
-            const online =
-                data.players?.online ?? 0;
-
-            const max =
-                data.players?.max ?? "?";
-
-            $("playerCount").textContent =
-                `${online} / ${max}`;
-
-            $("playerNumber").textContent =
-                online;
-
-
-            $("footerStatus").textContent =
-                "🟢 Serveur Minecraft en ligne";
-
-
-            /* -------------------------------------------------
-               PLAYERS
-               ------------------------------------------------- */
-
-            renderMinecraftPlayers(
-                data.players?.list || []
-            );
-
-
-            /* -------------------------------------------------
-               VERSION
-               ------------------------------------------------- */
-
-            if (data.version) {
-
-                console.log(
-                    "Version Minecraft:",
-                    data.version
-                );
-
-            }
-
-        }
-
-
-        /* -------------------------------------------------
-           SERVER OFFLINE
-           ------------------------------------------------- */
-
-        else {
-
-            dot.classList.add("offline");
-
-            statusText.textContent =
-                "SERVEUR HORS LIGNE";
-
-            statusText.style.color =
-                "var(--danger)";
-
-            statusSub.textContent =
-                "Le serveur n'est pas accessible";
-
-            $("playerCount").textContent =
-                "0 / ?";
-
-            $("playerNumber").textContent =
-                "0";
-
-            $("minecraftPlayers").innerHTML = `
-                <div class="empty">
-                    🔴<br><br>
-                    Le serveur Minecraft est actuellement hors ligne.
-                </div>
-            `;
-
-            $("footerStatus").textContent =
-                "🔴 Serveur Minecraft hors ligne";
-
-        }
-
     }
 
-    catch(error) {
-
-        console.error(
-            "Minecraft status:",
-            error
-        );
-
+    // Data could not be retrieved from either provider
+    if (!data) {
         dot.classList.add("offline");
-
-        statusText.textContent =
-            "STATUT INDISPONIBLE";
-
-        statusText.style.color =
-            "var(--muted)";
-
-        statusSub.textContent =
-            "Impossible de contacter le service";
+        statusText.textContent = "STATUT INDISPONIBLE";
+        statusText.style.color = "var(--muted)";
+        statusSub.textContent = "Impossible de contacter le service de statut";
 
         $("minecraftPlayers").innerHTML = `
             <div class="empty">
                 ⚠️<br><br>
-                Impossible de récupérer le statut Minecraft.
+                Impossible de récupérer le statut Minecraft pour le moment.
             </div>
         `;
 
-        $("footerStatus").textContent =
-            "⚠️ Statut temporairement indisponible";
-
+        $("footerStatus").textContent = "⚠️ Statut temporairement indisponible";
+        $("infoRow").style.display = "none";
+        $("offlineHintWrap").innerHTML = "";
+        return;
     }
 
+    if (data.online) {
+
+        dot.classList.remove("offline");
+        statusText.textContent = "SERVEUR EN LIGNE";
+        statusText.style.color = "var(--green)";
+        statusSub.textContent = `${data.online_count} joueur(s) connecté(s)`;
+
+        $("playerCount").textContent = `${data.online_count} / ${data.max}`;
+        $("playerNumber").textContent = data.online_count;
+        $("pingValue").textContent = data.ping || "—";
+        $("footerStatus").textContent = `🟢 Serveur en ligne${sourceFailed ? " (source de secours)" : ""}`;
+
+        renderMinecraftPlayers(data.list);
+        renderServerInfo(data);
+        $("offlineHintWrap").innerHTML = "";
+
+    } else {
+
+        dot.classList.add("offline");
+        statusText.textContent = "SERVEUR HORS LIGNE";
+        statusText.style.color = "var(--danger)";
+        statusSub.textContent = "Le serveur n'est pas accessible";
+
+        $("playerCount").textContent = "0 / ?";
+        $("playerNumber").textContent = "0";
+        $("pingValue").textContent = "—";
+        $("infoRow").style.display = "none";
+
+        $("minecraftPlayers").innerHTML = `
+            <div class="empty">
+                🔴<br><br>
+                Le serveur Minecraft est actuellement hors ligne.
+            </div>
+        `;
+
+        $("footerStatus").textContent = "🔴 Serveur hors ligne";
+
+        // Aternos met le serveur en veille après une période d'inactivité :
+        // ce message évite de croire à une panne quand c'est juste en veille.
+        $("offlineHintWrap").innerHTML = `
+            <div class="offline-hint">
+                💤 Sur Aternos, le serveur se met en veille après un moment sans joueur.
+                Connecte-toi depuis Minecraft avec l'IP ci-dessous pour le relancer,
+                puis reviens ici dans une minute — le statut se rafraîchit automatiquement.
+            </div>
+        `;
+    }
 }
 
+function renderServerInfo(data) {
+
+    const icon = $("serverIcon");
+
+    if (data.icon && data.icon.startsWith("data:image")) {
+        icon.src = data.icon;
+        icon.style.display = "block";
+    } else {
+        icon.style.display = "none";
+    }
+
+    const tags = [];
+    if (data.version) tags.push(`<span class="tag">${escapeHTML(String(data.version))}</span>`);
+    if (data.software) tags.push(`<span class="tag">${escapeHTML(String(data.software))}</span>`);
+
+    if (data.motd || tags.length) {
+        $("infoRow").style.display = "flex";
+        $("motdText").innerHTML = data.motd
+            ? `<strong>MOTD :</strong> ${escapeHTML(data.motd)}`
+            : "";
+        $("tagRow").innerHTML = tags.join("");
+    } else {
+        $("infoRow").style.display = "none";
+    }
+}
 
 /* =========================================================
    MINECRAFT PLAYERS
@@ -1413,62 +1117,32 @@ async function loadMinecraft() {
 
 function renderMinecraftPlayers(players) {
 
-    const container =
-        $("minecraftPlayers");
+    const container = $("minecraftPlayers");
 
     if (!players || players.length === 0) {
-
         container.innerHTML = `
             <div class="empty">
                 👤<br><br>
                 Aucun joueur actuellement connecté.
             </div>
         `;
-
         return;
     }
 
-
     container.innerHTML = "";
 
-
     players.forEach(player => {
-
-        const name =
-            player.name || "Joueur";
-
-
-        const row =
-            document.createElement("div");
-
-        row.className =
-            "player";
-
-
+        const name = (typeof player === "string" ? player : player?.name) || "Joueur";
+        const row = document.createElement("div");
+        row.className = "player";
         row.innerHTML = `
-
-            <img
-                class="player-avatar"
-                src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/34"
-                alt=""
-                loading="lazy"
-            >
-
-            <span class="player-name">
-                ${escapeHTML(name)}
-            </span>
-
+            <img class="player-avatar" src="https://mc-heads.net/avatar/${encodeURIComponent(name)}/32" alt="" loading="lazy">
+            <span class="player-name">${escapeHTML(name)}</span>
             <span class="player-status"></span>
-
         `;
-
-
         container.appendChild(row);
-
     });
-
 }
-
 
 /* =========================================================
    DISCORD WIDGET
@@ -1478,117 +1152,22 @@ async function loadDiscord() {
 
     try {
 
-        const response =
-            await fetch(
-                `https://discord.com/api/guilds/${CONFIG.discordGuild}/widget.json`,
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-            throw new Error(
-                "Discord widget disabled"
-            );
-        }
-
-
-        const data =
-            await response.json();
-
-
-        $("discordCount").textContent =
-            `${data.presence_count ?? 0} en ligne`;
-
-
-        const container =
-            $("discordMembers");
-
-
-        if (
-            !data.members ||
-            data.members.length === 0
-        ) {
-
-            container.innerHTML = `
-                <div class="empty">
-                    💬<br><br>
-                    Aucun membre actuellement affiché.
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        container.innerHTML = "";
-
-
-        data.members.forEach(member => {
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                "player";
-
-
-            const avatar =
-                member.avatar_url ||
-                "https://cdn.discordapp.com/embed/avatars/0.png";
-
-
-            row.innerHTML = `
-
-                <img
-                    class="player-avatar"
-                    src="${avatar}"
-                    alt=""
-                    loading="lazy"
-                >
-
-                <span class="player-name">
-                    ${escapeHTML(
-                        member.username || "Membre"
-                    )}
-                </span>
-
-                <span class="player-status"></span>
-
-            `;
-
-
-            container.appendChild(row);
-
-        });
-
-    }
-
-    catch(error) {
-
-        console.error(
-            "Discord:",
-            error
+        const response = await fetchWithTimeout(
+            `https://discord.com/api/guilds/${CONFIG.discordGuild}/widget.json`
         );
 
+        if (!response.ok) throw new Error("Discord widget disabled");
 
-        $("discordCount").textContent =
-            "indisponible";
+        const data = await response.json();
 
+        $("discordCount").textContent = `${data.presence_count ?? 0} membre(s) en ligne`;
 
-        $("discordMembers").innerHTML = `
-            <div class="empty">
-                ⚠️<br><br>
-                Le widget Discord n'est pas disponible.
-            </div>
-        `;
+    } catch (error) {
 
+        console.error("Discord:", error);
+        $("discordCount").textContent = "Widget indisponible";
     }
-
 }
-
 
 /* =========================================================
    COPY IP
@@ -1597,27 +1176,12 @@ async function loadDiscord() {
 async function copyIP() {
 
     try {
-
-        await navigator.clipboard.writeText(
-            CONFIG.minecraftAddress
-        );
-
-        showToast(
-            "🎮 IP Minecraft copiée !"
-        );
-
+        await navigator.clipboard.writeText(CONFIG.minecraftAddress);
+        showToast("🎮 IP Minecraft copiée !");
+    } catch {
+        showToast(CONFIG.minecraftAddress);
     }
-
-    catch {
-
-        showToast(
-            CONFIG.minecraftAddress
-        );
-
-    }
-
 }
-
 
 /* =========================================================
    REFRESH
@@ -1625,32 +1189,14 @@ async function copyIP() {
 
 async function refreshAll() {
 
-    $("lastUpdate").innerHTML =
-        `<span class="loading"></span>`;
+    const label = $("lastUpdate");
+    label.innerHTML = `<span class="loading"></span>`;
 
+    await Promise.all([loadMinecraft(), loadDiscord()]);
 
-    await Promise.all([
-        loadMinecraft(),
-        loadDiscord()
-    ]);
-
-
-    const now =
-        new Date();
-
-
-    $("lastUpdate").textContent =
-        `Mis à jour à ${now.toLocaleTimeString(
-            "fr-FR",
-            {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit"
-            }
-        )}`;
-
+    const now = new Date();
+    label.textContent = `Mis à jour à ${now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
 }
-
 
 /* =========================================================
    TOAST
@@ -1658,66 +1204,32 @@ async function refreshAll() {
 
 let toastTimeout;
 
-
 function showToast(message) {
-
-    const toast =
-        $("toast");
-
-    toast.textContent =
-        message;
-
+    const toast = $("toast");
+    toast.textContent = message;
     toast.classList.add("show");
-
-
     clearTimeout(toastTimeout);
-
-
-    toastTimeout =
-        setTimeout(() => {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        }, 2200);
-
+    toastTimeout = setTimeout(() => toast.classList.remove("show"), 2200);
 }
-
 
 /* =========================================================
    SECURITY
    ========================================================= */
 
 function escapeHTML(value) {
-
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        value;
-
+    const div = document.createElement("div");
+    div.textContent = value;
     return div.innerHTML;
-
 }
-
 
 /* =========================================================
    START
    ========================================================= */
 
 refreshAll();
-
-
-/* Actualisation automatique */
-
-setInterval(
-    refreshAll,
-    CONFIG.refreshInterval
-);
+setInterval(refreshAll, CONFIG.refreshInterval);
 
 </script>
 
 </body>
 </html>
-```
